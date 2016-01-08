@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>javascript</title>
+  <title>闭包的学习(1) | javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="javascript">
-<meta property="og:url" content="http://oneboi.github.io/js.git/index.html">
+  <meta name="description" content="模仿块级作用域JavaScript 没有块级作用域的概念。这意味着在块语句中定义的变量，实际上是在包含块语句的函数中而非在块语句中创建的，来看下面的例子。123456function A(count)&amp;#123;for (var i=0; i &amp;lt; count; i++)&amp;#123;alert(i);&amp;#125;alert(i); //计数&amp;#125;
+###变量何事销毁这个函数中定义了一个f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闭包的学习(1)">
+<meta property="og:url" content="http://oneboi.github.io/js.git/2016/01/08/closure1/index.html">
 <meta property="og:site_name" content="javascript">
-<meta property="og:description">
+<meta property="og:description" content="模仿块级作用域JavaScript 没有块级作用域的概念。这意味着在块语句中定义的变量，实际上是在包含块语句的函数中而非在块语句中创建的，来看下面的例子。123456function A(count)&amp;#123;for (var i=0; i &amp;lt; count; i++)&amp;#123;alert(i);&amp;#125;alert(i); //计数&amp;#125;
+###变量何事销毁这个函数中定义了一个f">
+<meta property="og:updated_time" content="2016-01-08T02:07:44.027Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="javascript">
-<meta name="twitter:description">
+<meta name="twitter:title" content="闭包的学习(1)">
+<meta name="twitter:description" content="模仿块级作用域JavaScript 没有块级作用域的概念。这意味着在块语句中定义的变量，实际上是在包含块语句的函数中而非在块语句中创建的，来看下面的例子。123456function A(count)&amp;#123;for (var i=0; i &amp;lt; count; i++)&amp;#123;alert(i);&amp;#125;alert(i); //计数&amp;#125;
+###变量何事销毁这个函数中定义了一个f">
   
     <link rel="alternative" href="/atom.xml" title="javascript" type="application/atom+xml">
   
@@ -67,82 +71,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-closure2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/js/2016/01/08/closure2/" class="article-date">
-  <time datetime="2016-01-08T04:23:54.179Z" itemprop="datePublished">2016-01-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/js/categories/closure/">闭包</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/js/2016/01/08/closure2/">闭包的学习(2)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#立即调用函数表达式（IIFE）<br>在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// An immediately-invoked function expression.</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="string">"Hello world"</span>;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">console</span>.log( foo ); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>#作为参数的函数<br>在 JavaScript 中，函数是“一等公民” － 它们可以被赋给变量或者作为参数传递给另一个函数。传递函<br>数作为参数是 jQuery 中的惯用法。<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// <span class="type">Passing</span> a named function <span class="keyword">as</span> an argument</span><br><span class="line"><span class="keyword">var</span> myFn = function( fn ) &#123;</span><br><span class="line"><span class="keyword">var</span> <span class="literal">result</span> = fn();</span><br><span class="line">console.log( <span class="literal">result</span> );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> myOtherFn = function() &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="string">"hello world"</span>;</span><br><span class="line">&#125;;</span><br><span class="line">myFn( myOtherFn ); // <span class="string">"hello world"</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="u95ED_u5305_u2013_u7231_u7684_u521D_u4F53_u9A8C"><a href="#u95ED_u5305_u2013_u7231_u7684_u521D_u4F53_u9A8C" class="headerlink" title="闭包–爱的初体验"></a>闭包–爱的初体验</h1><p>在接触一个新技术的时候，我首先会做的一件事就是：找它的demo code。对于码农们来说，代码有时候比自然语言更能理解一个事物。 其实，闭包无处不在，比如：jQuery、zepto的主要代码都包含在一个大的闭包中，所以下面我先写一个最简单最原始的闭包demo，好让你在大脑里产生闭包的画面：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">"Hello Closure!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> B;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> c = A();</span><br><span class="line">c();<span class="comment">//Hello Closure!</span></span><br></pre></td></tr></table></figure></p>
-<p>这是史上最简单的闭包，不能再简单了，再简单就不是闭包了！</p>
-<p>有了初步的认识后，我们简单分析一下它和普通函数有什么不同，这样我们才能从“茫茫人海”中一眼认出“她”。</p>
-<p>上面代码翻译成自然语言如下：</p>
-<p>(1)定义了一个普通函数A</p>
-<p>(2)在A中定义了普通函数B</p>
-<p>(3)在A中返回B（确切的讲，在A中返回B的引用）</p>
-<p>(4)执行A(),把A的返回结果赋值给变量 c</p>
-<p>(5)执行 c()</p>
-<p>把这5步操作总结成一句扯淡的话就是：</p>
-<p>函数A的内部函数B被函数A外的一个变量 c 引用</p>
-<p>把这句扯淡的话再加工一下就变成了闭包的定义：</p>
-<p>当一个内部函数被其外部函数之外的变量引用时，就形成了一个闭包。</p>
-<p>不要刻意去记住这个定义，我告诉你这个定义的目的是想让你理解上面的5步操作就是在阐述闭包的定义。</p>
-<p>因此，当你执行了上述5步操作的时候，你就已经定义了一个闭包！</p>
-<p>这就是闭包。</p>
-<h1 id="u95ED_u5305_u7684_u4F5C_u7528"><a href="#u95ED_u5305_u7684_u4F5C_u7528" class="headerlink" title="闭包的作用"></a>闭包的作用</h1><p>在了解闭包的作用之前，我们先了解一下 javascript中的GC机制:在javascript中，如果一个对象不再被引用，那么这个对象就会被GC回收，否则这个对象一直会保存在内存中。</p>
-<p>在上述例子中，B定义在A中，因此B依赖于A,而外部变量 c 又引用了B, 所以A间接的被 c 引用，也就是说，A不会被GC回收，会一直保存在内存中。为了证明我们的推理，上面的例子稍作改进：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       count ++;</span><br><span class="line">       <span class="built_in">console</span>.log(count);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> B;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> c = A();</span><br><span class="line">c();<span class="comment">// 1</span></span><br><span class="line">c();<span class="comment">// 2</span></span><br><span class="line">c();<span class="comment">// 3</span></span><br></pre></td></tr></table></figure></p>
-<p>count是A中的一个变量，它的值在B中被改变，函数B每执行一次，count的值就在原来的基础上累加1。因此，A中的count一直保存在内存中。</p>
-<p>这就是闭包的作用，有时候我们需要一个模块中定义这样一个变量：希望这个变量一直保存在内存中但又不会“污染”全局的变量，这个时候，我们就可以用闭包来定义这个模块。</p>
-<p>#高端写法<br>上面的写法其实是最简单最原始的写法，而在实际应用中，没人这么玩，特别是在一些大型JS框架中更不会这么写。我之所以还要告诉你这种写法，是因为干扰因素越少越容易专注于一件事。下面我用常用的写法来写一个简单的demo组件：<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword">function</span><span class="list">(<span class="keyword">document</span>)</span><span class="collection">&#123;</span><br><span class="line">    var viewport;</span><br><span class="line">    var obj = <span class="collection">&#123;</span><br><span class="line">        init:function<span class="list">(<span class="keyword">id</span>)</span><span class="collection">&#123;</span><br><span class="line">           viewport = document.querySelector<span class="list">(<span class="string">"#"</span>+id)</span><span class="comment">;</span></span><br><span class="line">        &#125;</span>,</span><br><span class="line">        addChild:function<span class="list">(<span class="keyword">child</span>)</span><span class="collection">&#123;</span><br><span class="line">            viewport.appendChild<span class="list">(<span class="keyword">child</span>)</span><span class="comment">;</span></span><br><span class="line">        &#125;</span>,</span><br><span class="line">        removeChild:function<span class="list">(<span class="keyword">child</span>)</span><span class="collection">&#123;</span><br><span class="line">            viewport.removeChild<span class="list">(<span class="keyword">child</span>)</span><span class="comment">;</span></span><br><span class="line">        &#125;</span></span><br><span class="line">    &#125;</span></span><br><span class="line">    window.jView = obj;</span><br><span class="line">&#125;</span>)</span><span class="list">(<span class="keyword">document</span>)</span><span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
-<p>这个组件的作用是：初始化一个容器，然后可以给这个容器添加子容器，也可以移除一个容器。功能很简单，但这里涉及到了另外一个概念：立即执行函数。 简单了解一下就行。主要是要理解这种写法是怎么实现闭包功能的。</p>
-<p>可以将上面的代码结构分成两部分：(function(){})() 红色部分是一个表达式，而这个表达式本身是一个匿名函数，所以在这个表达式后面加()就表示执行这个匿名函数。</p>
-<p>因此这段代码执行执行过程可以分解如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params">document</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> viewport;</span><br><span class="line">    <span class="keyword">var</span> obj = &#123;</span><br><span class="line">        init:<span class="function"><span class="keyword">function</span>(<span class="params">id</span>)</span>&#123;</span><br><span class="line">            viewport = <span class="built_in">document</span>.querySelector(<span class="string">"#"</span>+id);</span><br><span class="line">        &#125;,</span><br><span class="line">        addChild:<span class="function"><span class="keyword">function</span>(<span class="params">child</span>)</span>&#123;</span><br><span class="line">            viewport.appendChild(child);</span><br><span class="line">        &#125;,</span><br><span class="line">        removeChild:<span class="function"><span class="keyword">function</span>(<span class="params">child</span>)</span>&#123;</span><br><span class="line">            viewport.removeChild(child);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">window</span>.jView = obj;</span><br><span class="line">&#125;;</span><br><span class="line">f(<span class="built_in">document</span>);</span><br></pre></td></tr></table></figure>
-<p>在这段代码中似乎看到了闭包的影子,但 f中没有任何返回值，似乎不具备闭包的条件，注意这句代码：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jView = obj;</span><br></pre></td></tr></table></figure></p>
-<p>obj 是在 f 中定义的一个对象，这个对象中定义了一系列方法， 执行window.jView = obj 就是在 window 全局对象定义了一个变量 jView，并将这个变量指向 obj 对象，即全局变量 jView 引用了 obj . 而 obj 对象中的函数又引用了 f 中的变量 viewport ,因此 f 中的 viewport 不会被GC回收，会一直保存到内存中，所以这种写法满足闭包的条件。</p>
-<h1 id="u7B80_u5355_u7684_u603B_u7ED3_u8BED"><a href="#u7B80_u5355_u7684_u603B_u7ED3_u8BED" class="headerlink" title="简单的总结语"></a>简单的总结语</h1><p>这是对闭包最简单的理解，当然闭包还有其更深层次的理解，这个就涉及的多了，你需要了解JS的执行环境(execution context)、活动对象(call object)以及作用域(scope)和作用域链(scope chain)的运行机制。但作为一个初学者，暂时不必了解这些，有了简单的理解之后，一定要在实际项目中用起来，等你用的多了，对于闭包，你自然会有更深层次的理解！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://oneboi.github.io/js.git/2016/01/08/closure2/" data-id="cij56idur0008x4mknl59ltjz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/js/tags/函数/">函数</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-closure1" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-closure1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/js/2016/01/08/closure1/" class="article-date">
   <time datetime="2016-01-08T02:07:44.027Z" itemprop="datePublished">2016-01-08</time>
@@ -159,8 +88,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/js/2016/01/08/closure1/">闭包的学习(1)</a>
+    <h1 class="article-title" itemprop="name">
+      闭包的学习(1)
     </h1>
   
 
@@ -207,48 +136,29 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-first" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/js/2016/01/08/first/" class="article-date">
-  <time datetime="2016-01-08T01:09:50.903Z" itemprop="datePublished">2016-01-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/js/2016/01/08/closure2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          闭包的学习(2)
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/js/2016/01/08/first/">Hellojavacsript</a>
-    </h1>
   
+    <a href="/js/2016/01/08/first/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hellojavacsript</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="u76EE_u5F55"><a href="#u76EE_u5F55" class="headerlink" title="目录"></a>目录</h1><p>. 函数<br>. 闭包<br>. 对象</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://oneboi.github.io/js.git/2016/01/08/first/" data-id="cij56idup0007x4mk3rajod94" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
 
-
-  
-  
 </section>
         
           <aside id="sidebar">

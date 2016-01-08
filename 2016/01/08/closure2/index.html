@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>javascript</title>
+  <title>闭包的学习(2) | javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="javascript">
-<meta property="og:url" content="http://oneboi.github.io/js.git/index.html">
+  <meta name="description" content="#立即调用函数表达式（IIFE）在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。
+12345// An immediately-invoked function expression.(function() &amp;#123;var foo = &quot;Hello w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闭包的学习(2)">
+<meta property="og:url" content="http://oneboi.github.io/js.git/2016/01/08/closure2/index.html">
 <meta property="og:site_name" content="javascript">
-<meta property="og:description">
+<meta property="og:description" content="#立即调用函数表达式（IIFE）在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。
+12345// An immediately-invoked function expression.(function() &amp;#123;var foo = &quot;Hello w">
+<meta property="og:updated_time" content="2016-01-08T04:23:54.179Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="javascript">
-<meta name="twitter:description">
+<meta name="twitter:title" content="闭包的学习(2)">
+<meta name="twitter:description" content="#立即调用函数表达式（IIFE）在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。
+12345// An immediately-invoked function expression.(function() &amp;#123;var foo = &quot;Hello w">
   
     <link rel="alternative" href="/atom.xml" title="javascript" type="application/atom+xml">
   
@@ -67,9 +71,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-closure2" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-closure2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/js/2016/01/08/closure2/" class="article-date">
   <time datetime="2016-01-08T04:23:54.179Z" itemprop="datePublished">2016-01-08</time>
@@ -86,8 +88,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/js/2016/01/08/closure2/">闭包的学习(2)</a>
+    <h1 class="article-title" itemprop="name">
+      闭包的学习(2)
     </h1>
   
 
@@ -138,117 +140,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-closure1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/js/2016/01/08/closure1/" class="article-date">
-  <time datetime="2016-01-08T02:07:44.027Z" itemprop="datePublished">2016-01-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/js/categories/closure/">闭包</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/js/2016/01/08/closure1/">闭包的学习(1)</a>
-    </h1>
+    <a href="/js/2016/01/08/closure1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">闭包的学习(1)</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="u6A21_u4EFF_u5757_u7EA7_u4F5C_u7528_u57DF"><a href="#u6A21_u4EFF_u5757_u7EA7_u4F5C_u7528_u57DF" class="headerlink" title="模仿块级作用域"></a>模仿块级作用域</h1><p>JavaScript <code>没有块级作用域的概念</code>。这意味着在<code>块语句</code>中定义的变量，实际上是在包含块语句的函数中而非在块语句中创建的，来看下面的例子。<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">(count)</span><span class="comment">&#123;</span><br><span class="line">for (var i=0; i &lt; count; i++)&#123;</span><br><span class="line">alert(i);</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="title">alert</span><span class="params">(i)</span>;</span> <span class="comment">//计数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###变量何事销毁<br>这个函数中定义了一个for循环，而变量i的初始值被设置为0。在Java、C++等语言中，变量i只会在for循环的语句块中有定义，循环一旦结束，变量i就会被销毁。</p>
-<p>可是在JavaScrip中,变量i是定义在ouputNumbers()的活动对象中的，因此从它有定义开始，就可以在函数内部随处访问它。即使像下面这样错误地重新声明同一个变量，也不会改变它的值。</p>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outputNumbers</span><span class="params">(count)</span><span class="comment">&#123;</span><br><span class="line">for (var i=0; i &lt; count; i++)&#123;</span><br><span class="line">alert(i);</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="title">var</span> <span class="title">i</span>;</span> <span class="comment">//重新声明变量</span></span><br><span class="line">alert(i); <span class="comment">//计数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="javscript_u5BF9_u53D8_u91CF_u7684_u5FFD_u89C6"><a href="#javscript_u5BF9_u53D8_u91CF_u7684_u5FFD_u89C6" class="headerlink" title="javscript对变量的忽视"></a>javscript对变量的忽视</h3><p>JavaScript从来不会告诉你是否多次声明了同一个变量；遇到这种情况，它只会对后续的声明视而不见（不过，它会执行后续声明中的变量初始化）</p>
-<p>#匿名函数的一大用处</p>
-<p>#匿名函数可以用来模仿块级作用域并避免这上述题。</p>
-<p>用作块级作用域（通常称为私有作用域）的匿名函数的语法如下所示。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">语法</span><br><span class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="comment">//这里是块级作用域</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p>#函数表达式的定义</p>
-<p>以上代码定义并立即调用了一个匿名函数。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将函数声明包含在一对圆括号中，表示它实际上是一个函数表达式。</span><br></pre></td></tr></table></figure></p>
-<p>而紧随其后的另一对圆括号会立即调用这个函数。如果有读者感觉这种语法不太好理解，<br>可以再看看下面这个例子。</p>
-<p>var count = 5;<br>outputNumbers(count);<br>这里初始化了变量count，将其值设置为5。当然，这里的变量是没有必要的，因为可以把值直接<br>传给函数。为了让代码更简洁，我们在调用函数时用5 来代替变量count，如下所示。<br>outputNumbers(5);</p>
-<h1 id="u53D8_u91CF_u53EA_u4E0D_u8FC7_u662F_u503C_u7684_u53E6_u4E00_u79CD_u8868_u73B0_u5F62_u5F0F"><a href="#u53D8_u91CF_u53EA_u4E0D_u8FC7_u662F_u503C_u7684_u53E6_u4E00_u79CD_u8868_u73B0_u5F62_u5F0F" class="headerlink" title="变量只不过是值的另一种表现形式"></a>变量只不过是值的另一种表现形式</h1><p>这样做之所以可行，是因为变量只不过是值的另一种表现形式，因此用实际的值替换变量没有问题。<br>再看下面的例子。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someFunction = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="comment">//这里是块级作用域</span></span><br><span class="line">&#125;;</span><br><span class="line">someFunction();</span><br><span class="line"></span><br><span class="line">这里</span><br><span class="line">someFunction是变量</span><br><span class="line">someFunction()是值</span><br></pre></td></tr></table></figure>
-<p>这个例子先定义了一个函数，然后立即调用了它。<br><code>函数的定义</code><br>定义函数的方式是创建一个匿名函数，并把匿名函数赋值给变量someFunction。<br><code>函数的调用</code><br>而调用函数的方式是在函数名称后面添加一对圆括号，即someFunction()</p>
-<p>通过前面的例子我们知道，可以使用实际的值来取代变量count，那在这里是不是<br>也可以用函数的值直接取代函数名呢？ 然而，下面的代码却会导致错误。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="comment">//这里是块级作用域</span></span><br><span class="line">&#125;(); <span class="comment">//出错！</span></span><br></pre></td></tr></table></figure>
-<h1 id="u4E3A_u4EC0_u4E48_u51FA_u9519"><a href="#u4E3A_u4EC0_u4E48_u51FA_u9519" class="headerlink" title="为什么出错"></a>为什么出错</h1><p>这段代码会导致语法错误，<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">是因为JavaScript 将<span class="function"><span class="keyword">function</span></span> 关键字当作一个函数声明的开始，而函</span><br><span class="line">数声明后面不能跟圆括号</span><br></pre></td></tr></table></figure></p>
-<p>。然而，函数表达式的后面可以跟圆括号。要将函数声明转换成函数表达式，<br>只要像下面这样给它加上一对圆括号即可。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="comment">//这里是块级作用域</span></span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">函数的声明</span><br><span class="line">函数的表达式</span><br></pre></td></tr></table></figure></p>
-<p>#开始例子的修改（利用函数实现了块级作用域，限制了变量的作用范围）<br>无论在什么地方，只要临时需要一些变量，就可以使用私有作用域，例如：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outputNumbers</span><span class="params">(count)</span></span>&#123;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; count; i++)&#123;</span><br><span class="line">alert(i);</span><br><span class="line">&#125;</span><br><span class="line">&#125;)();</span><br><span class="line">alert(i); <span class="comment">//导致一个错误！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="u8FD9_u662F_u4E00_u79CD_u6280_u672F"><a href="#u8FD9_u662F_u4E00_u79CD_u6280_u672F" class="headerlink" title="这是一种技术"></a>这是一种技术</h1><p>##技术用在何处<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这种技术经常在全局作用域中被用在函数外部，从而限制向全局作用域中添加过多的变量和函数。</span><br></pre></td></tr></table></figure></p>
-<p>##代码编写的习惯（不要搞乱全局作用域）<br>一般来说，我们都应该尽量少向全局作用域中添加变量和函数。</p>
-<p>##这种技术解决了什么问题</p>
-<p>在一个由很多开发人员共同参与的大型应用程序中，过多的全局变量和函数很容易导致命名冲突。而通过创建私有作用域，每个开发人员既可以使用自己的变量，又不必担心搞乱全局作用域。例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">if</span> (now.getMonth() == <span class="number">0</span> &amp;&amp; now.getDate() == <span class="number">1</span>)&#123;</span><br><span class="line">alert(<span class="string">"Happy new year!"</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;)();</span><br><span class="line">次例子说明，立即执行函数表达式也不是立即给出结果而是可以先写了放在那里，等满足一定的条件再在、去执行。</span><br></pre></td></tr></table></figure></p>
-<p>分解说明：<br>把上面这段代码放在全局作用域中，可以用来确定哪一天是1 月1 日；如果到了这一天，就会向用户显示一条祝贺新年的消息。其中的变量now 现在是匿名函数中的局部变量，而我们不必在全局作用域中创建它。</p>
-<p>这种做法可以减少闭包占用的内存问题，因为没有指向匿名函数的引用。只要函<br>数执行完毕，就可以立即销毁其作用域链了。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">闭包是用来不然变量销毁，但是变量的存在始终会占用内存</span><br><span class="line">没有指向匿名函数的引用</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://oneboi.github.io/js.git/2016/01/08/closure1/" data-id="cij56idu30000x4mk3zju3kqy" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/js/tags/函数/">函数</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-    <article id="post-first" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/js/2016/01/08/first/" class="article-date">
-  <time datetime="2016-01-08T01:09:50.903Z" itemprop="datePublished">2016-01-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/js/2016/01/08/first/">Hellojavacsript</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="u76EE_u5F55"><a href="#u76EE_u5F55" class="headerlink" title="目录"></a>目录</h1><p>. 函数<br>. 闭包<br>. 对象</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://oneboi.github.io/js.git/2016/01/08/first/" data-id="cij56idup0007x4mk3rajod94" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-  
 </section>
         
           <aside id="sidebar">
