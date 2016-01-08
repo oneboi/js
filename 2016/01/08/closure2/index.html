@@ -5,19 +5,19 @@
   
   <title>闭包的学习(2) | javascript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#立即调用函数表达式（IIFE）在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。
-12345// An immediately-invoked function expression.(function() &amp;#123;var foo = &quot;Hello w">
+  <meta name="description" content="立即调用函数表达式（IIFE）在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。
+12345// An immediately-invoked function expression.(function() &amp;#123;var foo = &quot;Hello wo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="闭包的学习(2)">
 <meta property="og:url" content="http://oneboi.github.io/js.git/2016/01/08/closure2/index.html">
 <meta property="og:site_name" content="javascript">
-<meta property="og:description" content="#立即调用函数表达式（IIFE）在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。
-12345// An immediately-invoked function expression.(function() &amp;#123;var foo = &quot;Hello w">
-<meta property="og:updated_time" content="2016-01-08T04:23:54.179Z">
+<meta property="og:description" content="立即调用函数表达式（IIFE）在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。
+12345// An immediately-invoked function expression.(function() &amp;#123;var foo = &quot;Hello wo">
+<meta property="og:updated_time" content="2016-01-08T08:44:08.413Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="闭包的学习(2)">
-<meta name="twitter:description" content="#立即调用函数表达式（IIFE）在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。
-12345// An immediately-invoked function expression.(function() &amp;#123;var foo = &quot;Hello w">
+<meta name="twitter:description" content="立即调用函数表达式（IIFE）在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。
+12345// An immediately-invoked function expression.(function() &amp;#123;var foo = &quot;Hello wo">
   
     <link rel="alternative" href="/atom.xml" title="javascript" type="application/atom+xml">
   
@@ -74,7 +74,7 @@
         <section id="main"><article id="post-closure2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/js/2016/01/08/closure2/" class="article-date">
-  <time datetime="2016-01-08T04:23:54.179Z" itemprop="datePublished">2016-01-08</time>
+  <time datetime="2016-01-08T08:44:08.413Z" itemprop="datePublished">2016-01-08</time>
 </a>
     
   <div class="article-category">
@@ -97,10 +97,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#立即调用函数表达式（IIFE）<br>在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。</p>
+        <h1 id="u7ACB_u5373_u8C03_u7528_u51FD_u6570_u8868_u8FBE_u5F0F_uFF08IIFE_uFF09"><a href="#u7ACB_u5373_u8C03_u7528_u51FD_u6570_u8868_u8FBE_u5F0F_uFF08IIFE_uFF09" class="headerlink" title="立即调用函数表达式（IIFE）"></a>立即调用函数表达式（IIFE）</h1><p>在 JavaScript中一个常见的模式是立即调用函数表达式。这种模式创建一个函数表达式然后立即执行。IIFE 在要避免污染全局命名空间的情况下非常有用 －函数内声明的变量，在外部是不可见的。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// An immediately-invoked function expression.</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="string">"Hello world"</span>;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">console</span>.log( foo ); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>#作为参数的函数<br>在 JavaScript 中，函数是“一等公民” － 它们可以被赋给变量或者作为参数传递给另一个函数。传递函<br>数作为参数是 jQuery 中的惯用法。<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// <span class="type">Passing</span> a named function <span class="keyword">as</span> an argument</span><br><span class="line"><span class="keyword">var</span> myFn = function( fn ) &#123;</span><br><span class="line"><span class="keyword">var</span> <span class="literal">result</span> = fn();</span><br><span class="line">console.log( <span class="literal">result</span> );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> myOtherFn = function() &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="string">"hello world"</span>;</span><br><span class="line">&#125;;</span><br><span class="line">myFn( myOtherFn ); // <span class="string">"hello world"</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="u95ED_u5305_u2013_u7231_u7684_u521D_u4F53_u9A8C"><a href="#u95ED_u5305_u2013_u7231_u7684_u521D_u4F53_u9A8C" class="headerlink" title="闭包–爱的初体验"></a>闭包–爱的初体验</h1><p>在接触一个新技术的时候，我首先会做的一件事就是：找它的demo code。对于码农们来说，代码有时候比自然语言更能理解一个事物。 其实，闭包无处不在，比如：jQuery、zepto的主要代码都包含在一个大的闭包中，所以下面我先写一个最简单最原始的闭包demo，好让你在大脑里产生闭包的画面：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">"Hello Closure!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> B;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> c = A();</span><br><span class="line">c();<span class="comment">//Hello Closure!</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="u4F5C_u4E3A_u53C2_u6570_u7684_u51FD_u6570"><a href="#u4F5C_u4E3A_u53C2_u6570_u7684_u51FD_u6570" class="headerlink" title="作为参数的函数"></a>作为参数的函数</h1><p>在 JavaScript 中，函数是“一等公民” － 它们可以被赋给变量或者作为参数传递给另一个函数。传递函<br>数作为参数是 jQuery 中的惯用法。<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// <span class="type">Passing</span> a named function <span class="keyword">as</span> an argument</span><br><span class="line"><span class="keyword">var</span> myFn = function( fn ) &#123;</span><br><span class="line"><span class="keyword">var</span> <span class="literal">result</span> = fn();</span><br><span class="line">console.log( <span class="literal">result</span> );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> myOtherFn = function() &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="string">"hello world"</span>;</span><br><span class="line">&#125;;</span><br><span class="line">myFn( myOtherFn ); // <span class="string">"hello world"</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="u95ED_u5305_u2013_u6700_u7B80_u5355_u7684_u4F8B_u5B50"><a href="#u95ED_u5305_u2013_u6700_u7B80_u5355_u7684_u4F8B_u5B50" class="headerlink" title="闭包–最简单的例子"></a>闭包–最简单的例子</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">"Hello Closure!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> B;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> c = A();</span><br><span class="line">c();<span class="comment">//Hello Closure!</span></span><br></pre></td></tr></table></figure>
 <p>这是史上最简单的闭包，不能再简单了，再简单就不是闭包了！</p>
 <p>有了初步的认识后，我们简单分析一下它和普通函数有什么不同，这样我们才能从“茫茫人海”中一眼认出“她”。</p>
 <p>上面代码翻译成自然语言如下：</p>
@@ -132,7 +132,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://oneboi.github.io/js.git/2016/01/08/closure2/" data-id="cij56idur0008x4mknl59ltjz" class="article-share-link">Share</a>
+      <a data-url="http://oneboi.github.io/js.git/2016/01/08/closure2/" data-id="cij5fv27a0008kcmkunespfb9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/js/tags/函数/">函数</a></li></ul>
@@ -143,10 +143,19 @@
     
 <nav id="article-nav">
   
+    <a href="/js/2016/01/08/closure1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          闭包的学习(1)
+        
+      </div>
+    </a>
   
-    <a href="/js/2016/01/08/closure1/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/js/2016/01/08/first/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">闭包的学习(1)</div>
+      <div class="article-nav-title">Hellojavacsript</div>
     </a>
   
 </nav>
@@ -201,11 +210,11 @@
       <ul>
         
           <li>
-            <a href="/js/2016/01/08/closure2/">闭包的学习(2)</a>
+            <a href="/js/2016/01/08/closure1/">闭包的学习(1)</a>
           </li>
         
           <li>
-            <a href="/js/2016/01/08/closure1/">闭包的学习(1)</a>
+            <a href="/js/2016/01/08/closure2/">闭包的学习(2)</a>
           </li>
         
           <li>
